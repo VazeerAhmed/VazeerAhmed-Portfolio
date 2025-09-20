@@ -465,10 +465,115 @@ main {
 
 
 
+/*-------------------------*\
+#aibot
+\*-------------------------*/
+
+/* AI Chat Bot Styles */
+
+
+
+.ai-content {
+  background-color: #1a1a1a; /* dark background */
+  color: #f0f0f0; /* light text */
+  padding: 15px;
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+}
+
+.ai-content p {
+  margin-bottom: 10px;
+  color: #f0f0f0;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chat-messages {
+  border: 1px solid #555;
+  background-color: #121212; /* darker chat background */
+  padding: 10px;
+  height: 400px;
+  overflow-y: auto;
+  border-radius: 5px;
+  color: #f0f0f0;
+  font-size: 14px;
+  white-space: pre-wrap;
+  font-family: monospace;
+}
+
+.chat-messages div {
+  margin-bottom: 5px;
+}
+
+.chat-input {
+  display: flex;
+  gap: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #555;
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  font-size: 14px;
+}
+
+.chat-input input::placeholder {
+  color: #aaa;
+}
+
+.chat-input button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: #e63946; /* website accent color */
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.chat-input button:hover {
+  background-color: #d62828; /* darker red on hover */
+}
+
+/* AI message specific color */
+.chat-messages .ai-message {
+  color: #a8dadc; /* soft cyan for AI replies */
+}
+
+/* Scrollbar styling for chat messages */
+.chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background-color: #555;
+  border-radius: 3px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background-color: #1a1a1a;
+}
+
+
 
 /*-----------------------------------*\
   #NAVBAR
 \*-----------------------------------*/
+
+ .ai-logo {
+      width: 20px;
+      height: 20px;
+      margin-left: -35px;
+      vertical-align: right;
+    }
 
 .navbar {
   position: fixed;
@@ -1380,7 +1485,6 @@ textarea.form-input::-webkit-resizer { display: none; }
   }
 
   .article-title::after {
-    width: 40px;
     height: 5px;
   }
 
@@ -1411,6 +1515,7 @@ textarea.form-input::-webkit-resizer { display: none; }
   .sidebar {
     max-height: 180px;
     margin-bottom: 30px;
+    
   }
 
   .sidebar.active { max-height: 584px; }
