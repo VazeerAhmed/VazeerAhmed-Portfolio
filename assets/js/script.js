@@ -149,6 +149,46 @@ for (let i = 0; i < filterBtn.length; i++) {
       }
     });
 
+    //ai bot
+    // Chatbot functionality
+const chatMessages = document.getElementById("chat-messages");
+const userInput = document.getElementById("user-message");
+const sendBtn = document.getElementById("send-btn");
+
+async function sendMessage() {
+  const message = userInput.value.trim();
+  if (!message) return;
+
+  // Show user message
+  const userDiv = document.createElement("div");
+  userDiv.textContent = "You: " + message;
+  chatMessages.appendChild(userDiv);
+
+  userInput.value = "";
+
+  // Send to Flask backend
+  try {
+    const res = await fetch("/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message })
+    });
+
+    const data = await res.json();
+    const botDiv = document.createElement("div");
+    botDiv.textContent = "Bot: " + data.response;
+    chatMessages.appendChild(botDiv);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+sendBtn.addEventListener("click", sendMessage);
+userInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") sendMessage();
+});
+//ai bot end
 
 
 // page navigation variables
