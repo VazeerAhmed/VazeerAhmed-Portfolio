@@ -1,0 +1,208 @@
+---
+title: "Markdown Styles Guide"
+publishedAt: "2025-08-01"
+summary: ""
+---
+
+**Takeaway:** The guide to write the content in this blog.
+
+***
+
+## Headers
+
+We support six levels of headers that you can use `#` to `######` to create headers from Header 1 to Header 6.
+
+```markdown
+# This is Header 1
+## This is Header 2
+### This is Header 3
+#### This is Header 4
+##### This is Header 5
+###### This is Header 6
+```
+
+# This is Header 1
+## This is Header 2
+### This is Header 3
+#### This is Header 4
+##### This is Header 5
+###### This is Header 6
+
+<MarkdownAlert type="info">
+  We suggest that start with Header 2, as Header 1 is reserved for the title of the page, but we still leave the flexibility to use Header 1 if you want.
+</MarkdownAlert>
+
+***
+
+## Emphasis
+
+To make the words vividly, you can add the emphasis adaptively.
+
+```markdown
+- *This text will be italic* or _This text will be italic_
+- **This text will be bold** or __This text will be bold__
+- ***This text will be italic and bold*** or ___This text will be italic and bold___
+- ~~This text will be strikethrough~~
+- <u>This text will be underlined</u>
+- <sup>This text will be superscript</sup>
+- <sub>This text will be subscript</sub>
+```
+
+- *This text will be italic* or _This text will be italic_
+- **This text will be bold** or __This text will be bold__
+- ***This text will be italic and bold*** or ___This text will be italic and bold___
+- ~~This text will be strikethrough~~
+- <u>This text will be underlined</u>
+- <sup>This text will be superscript</sup>
+- <sub>This text will be subscript</sub>
+
+***
+
+## Lists
+
+There are two types of lists, unordered and ordered. You can use `*` for unordered and `1.` for ordered. And you can use the combination of them.
+
+### Unordered
+
+```markdown
+- Item 1
+- Item 2
+  - Item 2a
+  - Item 2b
+  - Item 2c
+    - Item 2c1
+    - Item 2c2
+```
+
+- Item 1
+- Item 2
+  - Item 2a
+  - Item 2b
+  - Item 2c
+    - Item 2c1
+    - Item 2c2
+
+### Ordered
+
+```markdown
+1. Item 1
+2. Item 2
+    1. Item 2a
+    2. Item 2b
+    3. Item 2c
+        1. Item 2c1
+        2. Item 2c2
+```
+
+1. Item 1
+2. Item 2
+    1. Item 2a
+    2. Item 2b
+    3. Item 2c
+        1. Item 2c1
+        2. Item 2c2
+
+### Combined
+
+```markdown
+1. Item 1
+2. Item 2
+    - Item 2a
+    - Item 2b
+    - Item 2c
+        - Item 2c1
+        - Item 2c2
+3. Item 3
+```
+
+1. Item 1
+2. Item 2
+    - Item 2a
+    - Item 2b
+    - Item 2c
+        - Item 2c1
+        - Item 2c2
+3. Item 3
+
+<MarkdownAlert type="tip">
+  To insert a line break within a text field, you can use the keyboard shortcut `Shift + Enter`. This allows you to start a new line without ending the current paragraph.
+</MarkdownAlert>
+
+***
+
+## Links
+
+```markdown
+Visit [1chooo.com](https://1chooo.com) for more information.
+
+You can also paste URLs directly, like https://1chooo.com or http://1chooo.com — autolinking works for `https` and `http` prefixes.
+
+Or use a reference-style link like [Hugo's Portfolio].
+
+[Hugo's Portfolio]: https://1chooo.com
+
+```
+
+Visit [1chooo.com](https://1chooo.com) for more information.
+
+You can also paste URLs directly, like https://1chooo.com or http://1chooo.com — autolinking works for `https` and `http` prefixes.
+
+Or use a reference-style link like [Hugo's Portfolio].
+
+[Hugo's Portfolio]: https://1chooo.com
+
+***
+
+## Images
+
+```markdown
+![Hugo Lin Dev](/opengraph-image)
+```
+
+![Hugo Lin Dev](/opengraph-image)
+
+***
+
+
+## Code
+
+We can use inline code and code block in markdown to represent the code.
+
+### Inline Code
+
+We can use the backticks <code>`</code> to create the inline code.
+
+```markdown
+`print("Hello, World!")`
+```
+
+`print("Hello, World!")`
+
+### Code Block
+
+With three backticks <code>\`\`\`</code>, we can create the code block. Also, we can specify the language to highlight the syntax next to the first three backticks, such as <code>\`\`\`python</code>.
+
+````markdown
+```python
+def foo() -> str:
+    """
+    This is a function to return the string 'bar'
+    
+    Returns:
+        str: 'bar'
+    """
+    return 'bar'
+```
+````
+
+```python
+def foo() -> str:
+    """
+    This is a function to return the string 'bar'
+    
+    Returns:
+        str: 'bar'
+    """
+    return 'bar'
+```
+

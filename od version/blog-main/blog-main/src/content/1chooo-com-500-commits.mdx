@@ -1,0 +1,177 @@
+---
+title: "My 500-Commit Repo: 10 Things I Learned"
+publishedAt: "2024-08-28"
+summary: "Built a 500 commits GitHub Repository: 10 essential steps you can't miss"
+image: "/images/posts/1chooo-com-500-commits/banner.webp"
+---
+
+Hey everyone! I'm Hugo — I just graduated from National Central University and am now taking a gap year to dive deeper into side projects, writing, and personal growth.
+
+Today, I'm excited to share a milestone: my personal website, [1chooo.com](https://1chooo.com), just hit [500 commits](https://github.com/1chooo/portfolio/commit/b01a0417642b3679ec87427f0c783bcaafe5e7c1) on [GitHub](https://github.com/1chooo/portfolio) 🎉.
+
+For a solo side project, this means a lot. It's been a journey of continuous iteration — building new features, refactoring code, and tackling technical debt. In this post, I'll reflect on the process, share lessons learned, and highlight a few roadblocks I hit along the way.
+
+![Built a 500 commits GitHub Repository: 10 essential steps you can't miss by Hugo](/images/posts/1chooo-com-500-commits/banner.webp)
+
+## A Quick Backstory
+
+This site started with a simple goal: build a personal portfolio I could showcase my work and share my journey. After a few failed attempts, I found a great open-source template — [vcard-personal-portfolio](https://codewithsadee.github.io/vcard-personal-portfolio/) by [@Sadee](https://github.com/codewithsadee) — that became my starting point. From there, I rewrote, customized, and expanded it into something of my own.
+
+Before diving into today's discussion, let me give you a quick overview of my project's current state. The idea behind this project started with a simple desire—I wanted to create a personal website. Although I had attempted several iterations in the past, none of them quite met my expectations. So, I turned to GitHub, searching through keywords like "portfolio" and "personal website" to find a design that matched my vision. It felt a bit like taking a shortcut, but that's the beauty of open source, right?
+
+Eventually, I came across a personal website template called [vcard-personal-portfolio](https://codewithsadee.github.io/vcard-personal-portfolio/), which had all the features I wanted. I owe a huge thanks to the original creator, [Sadee](https://github.com/codewithsadee), for generously sharing their work, allowing me to build and modify on top of it.
+
+### What's Inside the Site?
+
+The site now has five main sections:
+
+- **About:** a personal intro.
+- **Resume:** education, experience, and competitions.
+- **Portfolio:** my projects in dev, design, and data.
+- **Blog:** where I write about code and more.
+- **Contact:** for anyone who wants to connect.
+
+Each section serves a purpose and was iterated with care. Here's what it looks like:
+
+<EmblaCarousel
+  images={[
+    {
+      src: "/images/posts/1chooo-com-500-commits/about.webp",
+      alt: "1chooo.com/about",
+    },
+    {
+      src: "/images/posts/1chooo-com-500-commits/resume.webp",
+      alt: "1chooo.com/resume",
+    },
+    {
+      src: "/images/posts/1chooo-com-500-commits/portfolio.webp",
+      alt: "1chooo.com/portfolio",
+    },
+    {
+      src: "/images/posts/1chooo-com-500-commits/blog.webp",
+      alt: "1chooo.com/blog",
+    },
+    {
+      src: "/images/posts/1chooo-com-500-commits/contact.webp",
+      alt: "1chooo.com/contact",
+    },
+  ]}
+  options={{ loop: true }}
+/>
+
+---
+
+## 10 Lessons From 500 Commits
+
+Here are 10 key improvements I made — each one a valuable learning step:
+
+1. **Code Refactor**: Migrated from raw `HTML/CSS/JS` to [React](https://react.dev/), now deployed via [Vercel](https://vercel.com/).
+2. **Componentization**: Avoided "copy-paste" by creating shared, reusable components.
+3. **Readable Commit Messages**: Adopted [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for clarity and consistency.
+4. **Issue Tracking**: Used GitHub Issues + Milestones to plan and track progress.
+5. **Versioning with Tags**: Added Git tags for clearer release management.
+6. **Google Analytics**: Monitored user interaction to guide improvements.
+7. **Dependency Bot**: Enabled auto dependency updates for better security.
+8. **Next.js Migration**: Switched from Create React App to [Next.js](https://nextjs.org/) for better performance and routing.
+9. **Enhanced Docs**: Improved README and documentation for easier onboarding.
+10. **Component Testing**: Added unit tests to ensure stability and prevent regressions.
+
+![1chooo.com — 500 commits achieving 🥳](/images/posts/1chooo-com-500-commits/500-commit-achieving.webp)
+
+## Code Refactoring
+
+The original template by [@Sadee](https://github.com/codewithsadee) was a single-page application. All the content lived in one massive HTML file, with page transitions faked by showing and hiding different `<article>` blocks.
+
+It worked — and was great for quick edits — but it came with serious drawbacks:
+
+* **Scalability was a nightmare**. Every update meant scrolling through thousands of lines just to find one edit.
+* **Performance took a hit**. Since the entire site loaded upfront, even hidden content was downloaded every time.
+* **No routing**. As the site grew, managing navigation and structure became chaotic.
+
+I knew that without a full rewrite, adding new features or scaling the project would be a struggle. So, I made the leap.
+
+### Break It Down
+
+I considered my options — [React](https://react.dev/), [Vue](https://vuejs.org/), and even [Laravel](https://laravel.com/) — and landed on **React with TypeScript**. I'd used React before and knew its ecosystem and community would back me up through the tough parts.
+
+Then the real work began.
+
+First, I had to untangle the tightly coupled HTML, CSS, and JavaScript. I broke everything down into **reusable React components**, organizing each part of the site into clean, maintainable units. Some sections took weeks to fully refactor, especially those with complex layout or animation.
+
+I also added **React Router** to handle navigation properly, which meant only loading the parts of the site the user actually needed — boosting performance and UX.
+
+### The Result
+
+The refactor gave me:
+
+* **Modular code** that's easier to read, test, and scale
+* **Page-based routing** for a better user experience
+* **Flexibility** to add new features without fear of breaking everything else
+
+Most importantly, I was no longer constrained by the design decisions of the original template. The project was finally mine — and ready to grow.
+
+## Shared Components
+
+Refactoring was only part of the challenge, as I was stepping into front-end development for the first time. Initially, my React components were mostly just HTML code returned within `render` functions. However, during a self-review of my code, I noticed many opportunities for optimization. A significant issue was that several components could be made reusable, sharing similar styles and logic. In essence, I had fallen into a pattern of Copy-Paste Programming, where the same code was repeated in multiple places.
+
+Through this process, I learned to harness the power of the `map()` function in React. By passing in parameters, I could dynamically render components without duplicating code. This dramatically reduced redundancy and made the codebase cleaner and more maintainable. If you're interested in a more detailed breakdown of how to implement `map()` for elegance in a React TypeScript project, check out my article 👉🏻 [How to Make Your React TypeScript Project More Elegant with `map()`](/react-map).
+
+## Commit Messages
+
+As a frequent user of GitHub, paying attention to details has become part of my daily routine. One area where I became particularly meticulous is with commit messages. It's common to see vague messages like "Update," "Test," or "Upload," which offer no insight into what changes were made. Such commit messages can be unfriendly to future developers (or even your future self), making it difficult to track changes or understand the project's evolution.
+
+To address this, I began following the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification. This standard improves the readability and organization of commit messages, ensuring that each message clearly reflects the changes made. For a deeper dive into writing clean, informative commit messages, feel free to explore my article 👉🏻 [How to Write Beautiful Git Commit Messages](https://medium.com/@1chooo/git-commit-message-%E5%88%B0%E5%BA%95%E6%80%8E%E9%BA%BC%E5%AF%AB%E6%89%8D%E5%84%AA%E7%BE%8E-5b789157b549).
+
+![Well Commit Message in 1chooo.com!!!](/images/posts/1chooo-com-500-commits/well-commits.webp)
+
+## Issues & Milestones
+
+As my project evolved, the number of commits grew, and I realized that some commits lacked proper documentation. To manage changes more efficiently, I started using **Issues** as a way to keep track of the features and modifications I wanted to implement. This approach aligns with Agile practices, allowing me to clearly outline tasks, estimate the time needed, and identify the required technologies (though I must admit, there were still times I pushed directly to the `main` branch! 😅).
+
+Later on, I discovered **GitHub Milestones** while submitting PRs to the Microsoft VSCode Docs. Milestones helped me group related tasks under a specific goal, usually organized by time periods like "August 2024," making it easier to manage my project effectively. By associating issues with milestones, I could better track progress and stay organized on what I wanted to accomplish each month.
+
+![1chooo.com — August, 2024 Milestones](/images/posts/1chooo-com-500-commits/milestone.webp)
+
+## Tagging & Releases
+
+With each development iteration, I followed Agile principles to release new features and improvements quickly. After completing significant features or milestones, I released new versions of my site, using version numbers in the format of `vx.x.x` (e.g., major features, minor updates, and bug fixes). This versioning practice allowed me to track what changes were made in each release and the new functionalities added in that particular version.
+
+![1chooo.com — Tagging and Releases](/images/posts/1chooo-com-500-commits/tag.webp)
+
+## Google Analytics
+
+Sometimes, I wondered if anyone was actually visiting my website or if I was the only one constantly checking it. To satisfy my curiosity, I integrated **Google Analytics** to track user behavior on the site. Interestingly, I discovered visitors from the United States and even from India! This gave me a better understanding of my audience and helped me improve the site's content based on user interaction.
+
+![1chooo.com — GA](/images/posts/1chooo-com-500-commits/ga.webp)
+
+## GitHub Dependency Bot
+
+Midway through development, I realized I could incorporate the **GitHub Dependency Bot** feature. At first, I just thought it was cool when I saw it in other projects, but then I learned that it's a built-in GitHub functionality. The bot helps track dependencies within the project, alerting me when certain packages need updating or if there are any security vulnerabilities. It regularly checks for updates, keeping the project up-to-date and reducing the risk of using outdated packages.
+
+![GitHub Dependency Bot](/images/posts/1chooo-com-500-commits/dependabot.webp)
+
+## Next.js
+
+The decision to upgrade to **Next.js** was largely influenced by the **GitHub Dependency Bot**, which highlighted a deployment issue when upgrading **TypeScript**. You can read the full story in this post 👉🏻 [讓老舊的 Create React App (CRA) 支援 TypeScript 5.x 吧！](/blog/goodbye-react-create-app). This led to a major overhaul of my project, converting the entire **React Router** setup to **Next.js's AppRouter**. It was a significant learning curve, considering I was still getting the hang of React, but I managed to pull through! Initially, I thought it would take a month or two, but after an intense weekend of coding, the entire migration was complete!
+
+## README & Documentation
+
+Having a project on **GitHub** carries a certain desire to appear polished and professional. I dedicated considerable time using **Canva** to design a custom cover and writing a comprehensive **Contributing Guideline**. My hope was to encourage collaboration and embody the open-source spirit, allowing everyone to grow together. Additionally, I took the time to write proper documentation, including a **Code Walkthrough** and the challenges I faced during development. This will help future developers get up to speed quickly, and it also saves me from having to decipher my own code a month later!
+
+![1chooo.com/README](/images/posts/1chooo-com-500-commits/readme.webp)
+
+## Unit Test
+
+The final feature I'd like to highlight is **Unit Testing**. I started using **[Jest](https://jestjs.io/)** to write unit tests, and this was my first time doing so. It took quite some time to learn, and although my test coverage isn't very high at the moment, I'm working hard to improve it. With the major overhaul from **React** to **Next.js**, a lot of the tests needed to be rewritten, which has been a challenge. However, increasing the coverage is one of my short-term goals, and I'm determined to get it done soon.
+
+![Unit Test in 1chooo.com](/images/posts/1chooo-com-500-commits/tests.webp)
+
+## Outro
+
+Hitting **500 commits** is a milestone — but I'm far from done. I'm currently working on polishing the blog page, adding Markdown rendering, building out pagination with "Previous" and "Next" buttons, and figuring out the best way to implement the "Contact Me" feature — either through a Lambda function or a custom API.
+
+Along the way, I've run into plenty of challenges: technical debt, early coding decisions that didn't age well, and the ongoing struggle between moving fast and building things the right way. These moments have taught me that perfecting a project takes time, and progress often means going back to improve what's already been done.
+
+This site isn't just a portfolio — it's my playground, my resume, and a reflection of how I approach learning and building. I'll keep iterating and improving, and I hope you'll join me on this journey.
+
+If you're curious to follow along, check out my GitHub at [@1chooo](https://github.com/1chooo), or give the repo a ⭐ at [1chooo/portfolio](https://github.com/1chooo/portfolio). Thanks for reading!

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog Grid Example</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f5f5f5;
+  }
+
+  article.blog {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+  }
+
+  h2.article-title {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  /* Blog grid */
+  .blog-posts-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .blog-post-item {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+  }
+  .blog-post-item:hover {
+    transform: translateY(-5px);
+  }
+
+  .blog-banner-box img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+
+  .blog-content {
+    padding: 15px;
+  }
+
+  .blog-meta {
+    font-size: 12px;
+    color: gray;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .dot {
+    width: 4px;
+    height: 4px;
+    background: gray;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .blog-item-title {
+    font-size: 18px;
+    margin: 0 0 10px 0;
+  }
+
+  .blog-text.preview {
+    font-size: 14px;
+    color: #333;
+  }
+
+  /* Single blog page */
+  .blog-page {
+    display: none;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .back-btn {
+    display: inline-block;
+    margin-bottom: 15px;
+    background: #007bff;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .blog-page img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+
+  .blog-page h2 {
+    margin-top: 0;
+  }
+</style>
+</head>
+<body>
+
+<article class="blog" data-page="blog">
+  <header>
+    <h2 class="article-title">Blog</h2>
+  </header>
+
+  <!-- Blog Grid -->
+  <ul class="blog-posts-list" id="blogGrid">
+    <li class="blog-post-item" data-id="1">
+      <figure class="blog-banner-box">
+        <img src="https://via.placeholder.com/400x200" alt="Compound Interest Example">
+      </figure>
+      <div class="blog-content">
+        <div class="blog-meta">
+          <p class="blog-category">Finance</p>
+          <span class="dot"></span>
+          <time datetime="2025-10-01">Oct 1, 2025</time>
+        </div>
+        <h3 class="blog-item-title">Understanding Compound Interest</h3>
+        <p class="blog-text preview">A short intro to how compound interest works and grows your money over time.</p>
+      </div>
+    </li>
+
+    <li class="blog-post-item" data-id="2">
+      <figure class="blog-banner-box">
+        <img src="https://via.placeholder.com/400x200" alt="Budgeting Tips">
+      </figure>
+      <div class="blog-content">
+        <div class="blog-meta">
+          <p class="blog-category">Finance</p>
+          <span class="dot"></span>
+          <time datetime="2025-09-25">Sep 25, 2025</time>
+        </div>
+        <h3 class="blog-item-title">Top 5 Budgeting Tips</h3>
+        <p class="blog-text preview">Learn how to manage your money effectively with these simple tips.</p>
+      </div>
+    </li>
+  </ul>
+
+  <!-- Single Blog Page -->
+  <div class="blog-page" id="blogPage">
+    <a class="back-btn" onclick="backToGrid()">← Back</a>
+    <img id="blogPageImg" src="" alt="">
+    <h2 id="blogPageTitle"></h2>
+    <div class="blog-meta" id="blogPageMeta"></div>
+    <p id="blogPageContent"></p>
+  </div>
+
+</article>
+
+<script>
+  const blogs = [
+    {
+      id: 1,
+      title: "Understanding Compound Interest",
+      category: "Finance",
+      date: "Oct 1, 2025",
+      img: "https://via.placeholder.com/400x200",
+      content: "Here is the full blog content about compound interest. It explains formulas, examples, and practical use cases for personal finance..."
+    },
+    {
+      id: 2,
+      title: "Top 5 Budgeting Tips",
+      category: "Finance",
+      date: "Sep 25, 2025",
+      img: "https://via.placeholder.com/400x200",
+      content: "Full content of budgeting tips blog. Learn how to track expenses, save money, and plan for your financial future effectively..."
+    }
+  ];
+
+  const blogGrid = document.getElementById('blogGrid');
+  const blogPage = document.getElementById('blogPage');
+  const blogPageImg = document.getElementById('blogPageImg');
+  const blogPageTitle = document.getElementById('blogPageTitle');
+  const blogPageMeta = document.getElementById('blogPageMeta');
+  const blogPageContent = document.getElementById('blogPageContent');
+
+  document.querySelectorAll('.blog-post-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const blogId = parseInt(item.dataset.id);
+      const blog = blogs.find(b => b.id === blogId);
+      if(blog){
+        blogPageImg.src = blog.img;
+        blogPageTitle.textContent = blog.title;
+        blogPageMeta.textContent = `${blog.category} • ${blog.date}`;
+        blogPageContent.textContent = blog.content;
+        blogGrid.style.display = 'none';
+        blogPage.style.display = 'block';
+      }
+    });
+  });
+
+  function backToGrid(){
+    blogPage.style.display = 'none';
+    blogGrid.style.display = 'grid';
+  }
+</script>
+
+</body>
+</html>
