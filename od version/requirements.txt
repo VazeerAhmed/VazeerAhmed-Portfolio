@@ -1,7 +1,0 @@
-Flask==2.2.5
-flask-cors
-google-generativeai
-pdfplumber
-python-dotenv
-gunicorn
-flask-limiter      # optional but recommended for rate-limiting
