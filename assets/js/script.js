@@ -241,3 +241,110 @@ for (let i = 0; i < navigationLinks.length; i++) {
     }
   });
 }
+
+
+//skills
+const carousel = document.getElementById('skillsCarousel');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const categoryBtns = document.querySelectorAll('.category-btn');
+    const skillCards = document.querySelectorAll('.skill-card');
+
+    // Carousel navigation
+    prevBtn.addEventListener('click', () => {
+      carousel.scrollBy({ left: -220, behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      carousel.scrollBy({ left: 220, behavior: 'smooth' });
+    });
+
+    // Category filtering
+    categoryBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const category = btn.getAttribute('data-category');
+        
+        // Update active button
+        categoryBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Filter cards
+        skillCards.forEach(card => {
+          if (category === 'all' || card.getAttribute('data-category') === category) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        // Reset scroll
+        carousel.scrollTo({ left: 0, behavior: 'smooth' });
+      });
+    });
+
+    // Auto-scroll on mouse wheel
+    carousel.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      carousel.scrollBy({ left: e.deltaY < 0 ? -220 : 220, behavior: 'smooth' });
+    });
+
+    // Enhanced touch/drag scroll with touch device support
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    let momentumID;
+    let velocity = 0;
+    let lastPageX = 0;
+
+    function startDragging(e) {
+        isDown = true;
+        carousel.style.cursor = 'grabbing';
+        carousel.style.scrollBehavior = 'auto';
+        startX = (e.pageX || e.touches[0].pageX) - carousel.offsetLeft;
+        scrollLeft = carousel.scrollLeft;
+        lastPageX = e.pageX || e.touches[0].pageX;
+        
+        // Clear any existing momentum scrolling
+        cancelAnimationFrame(momentumID);
+    }
+
+    function stopDragging() {
+        if (!isDown) return;
+        isDown = false;
+        carousel.style.cursor = 'grab';
+        carousel.style.scrollBehavior = 'smooth';
+        
+        // Apply momentum
+        const momentumScroll = () => {
+            if (Math.abs(velocity) > 0.1) {
+                carousel.scrollLeft += velocity;
+                velocity *= 0.95; // Decay factor
+                momentumID = requestAnimationFrame(momentumScroll);
+            }
+        };
+        momentumScroll();
+    }
+
+    function dragging(e) {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = (e.pageX || e.touches[0].pageX) - carousel.offsetLeft;
+        const walk = (x - startX) * 2;
+        carousel.scrollLeft = scrollLeft - walk;
+        
+        // Calculate velocity
+        const currentPageX = e.pageX || e.touches[0].pageX;
+        velocity = (lastPageX - currentPageX) * 0.5;
+        lastPageX = currentPageX;
+    }
+
+    // Mouse events
+    carousel.addEventListener('mousedown', startDragging);
+    carousel.addEventListener('mouseleave', stopDragging);
+    carousel.addEventListener('mouseup', stopDragging);
+    carousel.addEventListener('mousemove', dragging);
+
+    // Touch events
+    carousel.addEventListener('touchstart', startDragging);
+    carousel.addEventListener('touchend', stopDragging);
+    carousel.addEventListener('touchmove', dragging);
