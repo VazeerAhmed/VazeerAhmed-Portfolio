@@ -781,6 +781,58 @@ main {
 
 
 /**
+ * #testimonials 
+ */
+
+.testimonials { margin-bottom: 30px; }
+
+.testimonials-title { margin-bottom: 20px; }
+
+.testimonials-list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 15px;
+  margin: 0 -15px;
+  padding: 25px 15px;
+  padding-bottom: 35px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: inline mandatory;
+}
+
+.testimonials-item {
+  min-width: 100%;
+  scroll-snap-align: center;
+}
+
+.testimonials-avatar-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(15px, -25px);
+  background: var(--bg-gradient-onyx);
+  border-radius: 14px;
+  box-shadow: var(--shadow-1);
+}
+
+.testimonials-item-title { margin-bottom: 7px; }
+
+.testimonials-text {
+  color: var(--light-gray);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-300);
+  line-height: 1.6;
+  display: -webkit-box;
+  line-clamp: 4;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+
+/**
  * #testimonials-modal
  */
 
@@ -805,43 +857,6 @@ main {
 .modal-container.active {
   pointer-events: all;
   visibility: visible;
-}
-
-.modal-content {
-  position: relative;
-  background: var(--eerie-black-1);
-  border: 1px solid var(--border-gradient-onyx);
-  box-shadow: var(--shadow-4);
-  border-radius: 16px;
-  max-width: 800px;
-  width: 90%;
-  max-height: 80vh;
-  overflow-y: auto; /* scrolling enabled */
-  padding: 20px;
-
-  /* Scrollbar Styling */
-  scrollbar-width: thin; /* Firefox */
-  scrollbar-color: var(--orange-yellow-crayola) var(--eerie-black-2); 
-  /* thumb color | track color */
-}
-
-/* Chrome, Edge, Safari */
-.modal-content::-webkit-scrollbar {
-  width: 8px; /* thin scrollbar */
-}
-
-.modal-content::-webkit-scrollbar-track {
-  background: var(--eerie-black-2); /* track matches site bg */
-  border-radius: 10px;
-}
-
-.modal-content::-webkit-scrollbar-thumb {
-  background: var(--orange-yellow-crayola); /* thumb matches accent color */
-  border-radius: 10px;
-}
-
-.modal-content::-webkit-scrollbar-thumb:hover {
-  background: var(--orange-yellow-crayola); /* lighter on hover */
 }
 
 .overlay {
@@ -921,7 +936,6 @@ main {
   color: var(--light-gray-70);
   font-weight: var(--fw-300);
   margin-bottom: 10px;
-    
 }
 
 .modal-content p {
@@ -929,8 +943,8 @@ main {
   font-size: var(--fs-6);
   font-weight: var(--fw-300);
   line-height: 1.6;
-  margin-bottom: 0;
 }
+
 
 
 /**

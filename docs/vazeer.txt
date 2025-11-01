@@ -1,0 +1,46 @@
+Vazeer Ahmed Mohammad - Portfolio Summary
+
+SUMMARY:
+- Data Science graduate proficient in Python, SQL, AWS
+- Experience in predictive modeling, data pipelines, statistical analysis, and dashboards
+- Seeking entry-level Data Analyst role
+
+EDUCATION:
+- MSc in Data Science, Teesside University, UK (Sep 2023 - Jul 2025)
+- B. Tech in Computer Science Engineering, Nalla Malla Reddy Engineering College, India (Jun 2016 - Mar 2021)
+
+SKILLS:
+- Programming & Analysis: Python (Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn), SQL, R
+- Data Visualization: Tableau, Power BI, Excel
+- Machine Learning & AI: Regression, Classification, NLP (NLTK, SpaCy, BERT), TensorFlow, PyTorch
+- Databases: MySQL, PostgreSQL, MongoDB
+- Cloud & Big Data: AWS (EC2, S3, RDS, SageMaker), Apache Spark, Hadoop
+- Tools: Git, JIRA, Flask, Django
+
+PROJECTS:
+- Predict Covid-19 Using CT-Scan: CNN model classifying CT scans with 80% accuracy
+- Covid-19 Visualization: Interactive dashboards tracking global COVID-19 statistics
+- Indoor Navigation System: 2D navigation system with improved route accuracy and reduced navigation time
+- Improved Technology for Enquiry in Chat Bot: High-performance NLP chatbot reducing query time by 80%
+- House Price Prediction: Regression model predicting house prices using Kaggle dataset
+- AI Voice-Enabled Chat Assistant Web Application: Flask web assistant using Google Gemini API for voice interaction
+
+INTERNSHIP:
+- Data Science Intern, Swecha Organization, India: Preprocessing, analysis, predictive models
+
+CERTIFICATIONS:
+- AWS Fundamentals: Going Cloud-Native (Coursera)
+- Python Programming Language Certification (GUVI)
+- Analyze Website Visitors with Google Analytics Segment (Coursera)
+
+ACHIEVEMENTS:
+- Completed 30-day internship on Data Science & AIML
+- National hackathon participation (Android mobile app)
+- Workshops: AI in Scale (IEEE), Data Science at BITS Pilani
+- Secretary for CSE Dept student committee (2018-19)
+
+EXTRA-CURRICULAR:
+- IEEE member, IOT/AI summer internship, Live Webcasting operator during elections
+
+SELF-DECLARATION:
+- Motivated, results-driven, dedicated to personal/professional growth
