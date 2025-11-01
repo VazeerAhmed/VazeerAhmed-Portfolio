@@ -26,43 +26,32 @@ if not API_KEY:
 
 genai.configure(api_key=API_KEY)
 
+
+
 # --- System Instruction ---
 SYSTEM_INSTRUCTION_NEW = (
-    "You are A.R.I.S.E., an advanced AI assistant integrated into Vazeer Ahmed’s portfolio website. "
-    "Your full form is 'Advanced Reasoning and Intelligent Support Engine.' "
-    "You are friendly, professional, and focused on providing accurate, clear, and helpful answers related to Vazeer’s technical background.\n\n"
     
-    "=== CORE BEHAVIOR RULES ===\n"
-    "1. Tone & Personality:\n"
-    "   - Be warm, concise, and confident.\n"
-    "   - Use professional yet approachable language.\n"
-    "   - Never use emojis, markdown symbols, or unnecessary punctuation.\n\n"
-    
-    "2. Knowledge Scope:\n"
-    "   - Focus only on Vazeer’s professional topics: projects, skills, education, certifications, tools, and technologies.\n"
-    "   - You may also explain general concepts in programming, machine learning, AI, or data science if relevant.\n"
-    "   - Politely decline unrelated topics (e.g., personal life, hobbies, entertainment, or non-technical chatter) with a standard fallback message:\n"
-    "       'That question seems beyond my scope. I can, however, help with Vazeer’s tech profile or related topics!'\n\n"
-    
-    "3. Context Handling:\n"
-    "   - Use details from Vazeer’s uploaded documents when available.\n"
-    "   - If information isn’t in the documents, provide a general technical explanation.\n"
-    "   - Always keep answers brief, factual, and context-aware.\n\n"
-    
-    "4. Response Formatting (Plain Text Only):\n"
-    "   - No markdown or special symbols.\n"
-    "   - Use simple bullet lists: '- Item'\n"
-    "   - Indent code examples with four spaces, without code fences.\n"
-    "   - Always end responses cleanly (no trailing punctuation or spaces).\n\n"
-    
-    "5. Example Rule:\n"
-    "   - When explaining a concept, first define it generally.\n"
-    "   - Then, if relevant, link it to one of Vazeer’s projects for context.\n\n"
-    
-    "Remember: Your purpose is to help visitors understand Vazeer’s technical expertise and professional profile effectively."
+    "Your name is A.R.I.S.E. You are a friendly, helpful, and expert AI assistant for Vazeer’s portfolio website. "
+    "Start conversations warmly if greeted. and sign off politely when the user says goodbye.\n\n"
+    "you need to greet the user only once at the start of the conversation. "
+    "You must always adhere to the following rules:\n"
+    "Full form of your name A.R.I.S.E: Advanced Reasoning and Intelligent Support Engine.\n\n"
+    "1. Portfolio & Tech Scope Only:\n"
+    "   - Answer questions about Vazeer’s skills, certifications, projects, resume, education, achievements, extra-curricular activities, or technical topics relevant to programming, ML, AI, data science, and data analytics, or any science/education related queries.\n"
+    "   - For anything clearly outside tech (e.g., weather, jokes), reply: 'I cannot provide an answer for this question, as it is outside my scope.'\n\n"
+    "2. General Knowledge + Contextual Linking:\n"
+    "   - Prioritize info from Vazeer's documents.\n"
+    "   - If not in docs, use general technical knowledge.\n"
+    "   - Explain clearly for broad audience.\n\n"
+    "3. Project-Based Examples:\n"
+    "   - Provide general definition first.\n"
+    "   - Then, if relevant, add example from Vazeer’s projects.\n\n"
+    "Formatting Rules (plain text only):\n"
+    "   - No Markdown symbols.\n"
+    "   - Lists: '- Item'.\n"
+    "   - Code: 4-space indentation, no fences.\n"    
+    "   - Mention project examples explicitly.\n"
 )
-
-
 
 # --- Clean Response Function ---
 def clean_response(text):
@@ -97,11 +86,18 @@ def clean_response(text):
     text = re.sub(r'\n\s*\n+', '\n\n', text)
     return text.strip()
 
+print("Current working directory:", os.getcwd())
+print("Docs folder path:", os.path.abspath("docs"))
+print("Docs folder exists:", os.path.exists("docs"))
+
+
 # --- Load Documents for Context (Summarized & Cached) ---
 @lru_cache(maxsize=1)  # Cache forever, since docs don't change often
 def load_docs_context():
     global doc_context
     docs_folder = "docs"
+    with open(os.path.join(docs_folder, "vazeer.txt"), "r", encoding="utf-8") as f:
+        doc_context = f.read()
     raw_content = ""  # Temp holder for full text
 
     if not os.path.exists(docs_folder):
@@ -122,7 +118,7 @@ def load_docs_context():
                             text_content += text + "\n"
                 if text_content:
                     raw_content += f"\n--- {filename} ---\n{text_content}\n"
-            elif filename.lower().endswith(('.py', '.js', '.html', '.css')):
+            elif filename.lower().endswith(('.txt','.py', '.js', '.html', '.css')):
                 with open(file_path, 'r', encoding='utf-8') as f:
                     content = f.read()
                     raw_content += f"\n--- {filename} ---\n{content}\n"
@@ -183,21 +179,24 @@ def chat_endpoint():
     user_message_lower = user_message.lower()
     is_greeting = any(re.search(pattern, user_message_lower) for pattern in greeting_patterns)
     
+# Greeting handler (only greet once)
     if is_greeting:
         if 'bye' in user_message_lower or 'goodbye' in user_message_lower:
             bot_response = "Goodbye! Feel free to return anytime for tech insights on Vazeer's portfolio."
-        else:
+        elif len(chat_history) == 0:  # only greet if it's the first user message
             bot_response = "Hello! I'm A.R.I.S.E. (Advanced Reasoning and Intelligent Support Engine), your guide to Vazeer's tech world. Ask about his projects, skills, etc."
+        else:
+            bot_response = "Hi again! How can I assist you with Vazeer’s portfolio or technical queries?"
         chat_history.append({"is_user": False, "text": bot_response})
         return jsonify({'response': bot_response, 'source': 'greeting_handler'})
 
+
     non_tech_keywords = [
-        'singing', 'cooking', 'music', 'art', 'hobbies', 'personal life',
-        'favorite food', 'what is love', 'meaning of life', 'how are you feeling',
-        'what do you think about', 'who are you', 'tell me about yourself',
-        'weather', 'politics', 'movies', 'books', 'sports', 'games', 'entertainment',
-        'tell me a story', 'joke', 'what to do today', 'how was your day'
-    ]
+    'singing', 'cooking', 'music', 'art', 'hobbies', 'personal life',
+    'favorite food', 'what is love', 'meaning of life', 'how are you feeling',
+    'tell me a story', 'joke', 'weather', 'politics', 'movies', 'books', 'sports', 'games', 'entertainment'
+]
+
     if any(keyword in user_message_lower for keyword in non_tech_keywords):
         bot_response = "I cannot provide an answer for this question, as it is outside my scope."
         chat_history.append({"is_user": False, "text": bot_response})
