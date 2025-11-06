@@ -126,7 +126,6 @@
 
         </ul>
 
-        <div class="separator"></div>
 
         <ul class="social-list">
 
@@ -154,9 +153,14 @@
               <ion-icon name="document-text-outline" style="pointer-events: none;"></ion-icon>
             </a>
           </li>
-
-
         </ul>
+        
+        <div class="copyright">
+          <h4>&copy; 2025 Vazeer Ahmed Mohammad</h4>
+        </div>
+
+
+        
 
       </div>
 
@@ -1205,10 +1209,6 @@
       </li>
 
       <li class="filter-item">
-        <button data-filter-btn>Certification</button>
-      </li>
-
-      <li class="filter-item">
         <button data-filter-btn>Data Analytics</button>
       </li>
 
@@ -1256,10 +1256,7 @@
           <button data-select-item>Applications</button>
         </li>
 
-        <li class="select-item">
-          <button data-select-item>Certification</button>
-        </li>
-
+        
       </ul>
 
     </div>
@@ -1372,106 +1369,6 @@
 
         </a>
       </li>
-
-      <li class="project-item active" data-filter-item data-category="certification">
-
-        <a href="https://www.coursera.org/account/accomplishments/verify/SNHHA68XRWNJ">
-
-          <figure class="project-img">
-            <div class="project-item-icon-box">
-              <ion-icon name="eye-outline"></ion-icon>
-            </div>
-
-            <img src="./assets/images/AWS.jpg" alt="AWS certificationloading="lazy">
-          </figure>
-
-          <h3 class="project-title">AWS Fundamentals: Going Cloud-Native </h3>
-
-          <p class="project-category">By Coursera</p>
-
-        </a>
-      </li>
-
-      <li class="project-item active" data-filter-item data-category="certification">
-
-        <a href="https://www.coursera.org/account/accomplishments/verify/TXXAMFK74LZP">
-
-          <figure class="project-img">
-            <div class="project-item-icon-box">
-              <ion-icon name="eye-outline"></ion-icon>
-            </div>
-
-            <img src="./assets/images/Website_Visitors.jpg" alt="Google Analytics certification" loading="lazy">
-          </figure>
-
-          <h3 class="project-title">Analyze Website Visitors with Google Analytics Segments</h3>
-
-          <p class="project-category">By Coursera</p>
-
-        </a>
-      </li>
-
-
-      <li class="project-item active" data-filter-item data-category="certification">
-
-        <a href="https://www.coursera.org/account/accomplishments/verify/TXXAMFK74LZP">
-
-          <figure class="project-img">
-            <div class="project-item-icon-box">
-              <ion-icon name="eye-outline"></ion-icon>
-            </div>
-
-            <img src="./assets/images/info.jpg" alt="Infosys certification" loading="lazy">
-          </figure>
-
-          <h3 class="project-title">Database Operations in MariaDB Using Python From Infosys</h3>
-
-          <p class="project-category">By Coursera</p>
-
-        </a>
-      </li>
-
-      <li class="project-item active" data-filter-item data-category="certification">
-
-        <a href="https://www.coursera.org/account/accomplishments/verify/TXXAMFK74LZP">
-
-          <figure class="project-img">
-            <div class="project-item-icon-box">
-              <ion-icon name="eye-outline"></ion-icon>
-            </div>
-
-            <img src="./assets/images/GuviCertification.png" alt="GuviCertification" loading="lazy">
-          </figure>
-
-          <h3 class="project-title">Python Programming</h3>
-
-          <p class="project-category">By Guvi</p>
-
-        </a>
-      </li>
-
-      <li class="project-item active" data-filter-item data-category="certification">
-
-        <a href="https://www.coursera.org/account/accomplishments/verify/TXXAMFK74LZP">
-
-          <figure class="project-img">
-            <div class="project-item-icon-box">
-              <ion-icon name="eye-outline"></ion-icon>
-            </div>
-
-            <img src="./assets/images/face_guvi.png" alt="GuviCertification" loading="lazy">
-          </figure>
-
-          <h3 class="project-title">Build a Face Recognition Application using Python</h3>
-
-          <p class="project-category">By Guvi</p>
-
-        </a>
-      </li>
-
-      
-
-
     </ul>
 
   </section>
@@ -1821,34 +1718,56 @@
     </form>
 
   </section>
+</article>
 
-      </article>
-
-      <!--
-  - #AI Section
--->
-  <article class="ai" data-page="ai">
+<!--- #AI Section / bot / chat -->
+<article class="ai" data-page="ai">
   <header>
     <h2 class="h2 article-title">AI Chat</h2>
   </header>
 
-  <section class="ai-content">
-<p>Meet A.R.I.S.E, an AI where Advanced Reasoning and Intelligent Support Engine powers advanced query answering with a dynamic feel.</p>
-    <div class="chat-container">
-      <div id="chat-messages" class="chat-messages"></div>
-      <div class="chat-input">
-        <input type="text" id="user-message" placeholder="Type your message...">
-        <button id="send-btn">Send</button>
+  <!-- Guidance Box -->
+  <div class="guidance-box" style="background:var(--eerie-black-1);padding:15px;border-radius:12px;margin-bottom:15px;font-size:14px;color:var(--light-gray);border:1px solid var(--jet);">
+    <p style="margin:0 0 8px;"><strong>Welcome to A.R.I.S.E Chat</strong></p>
+    <p style="margin:0;line-height:1.5;">
+      Ask about <strong>Vazeer’s projects, skills, resume</strong>, or get <strong>clear tech explanations</strong> with real examples.<br>
+      
+      Try: <em>“What is machine learning?”</em> or <em>“Show me Vazeer’s AI projects”</em>
+    </p>
+  </div>
+
+  <!-- Chat UI -->
+    <section class="ai-content">
+      <div class="chat-wrapper">
+
+        <!-- Header with Avatar -->
+        <div class="chat-header">
+          <img src="./assets/images/chatlogo1.png" alt="A.R.I.S.E" class="bot-avatar">
+          <div>
+            <div class="bot-name">A.R.I.S.E</div>
+            <div class="bot-subtitle">Advanced Reasoning &amp; Intelligent Support Engine</div>
+          </div>
+        </div>
+
+        <!-- Messages -->
+        <div id="chat-messages" class="chat-messages"></div>
+
+        <!-- Typing Indicator -->
+        <div id="typing-indicator" class="typing-indicator" style="display:none;">
+          <span></span><span></span><span></span>
+        </div>
+
+        <!-- Input -->
+        <div class="chat-input-wrapper">
+          <input type="text" id="user-message" placeholder="Ask me anything…" autocomplete="off">
+          <button id="send-btn" aria-label="Send">
+            <ion-icon name="send"></ion-icon>
+          </button>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 </article>
-
-
-
     </div>
-
-    
 
   </main>
 
@@ -1870,4 +1789,4 @@
 
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97dc19279fb3386b',t:'MTc1NzY0NTQzNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 
-</html>
+</html> 
