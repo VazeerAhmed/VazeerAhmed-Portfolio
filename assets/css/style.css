@@ -1,5 +1,5 @@
 /*-----------------------------------*\
-  #style.css
+  #style.css 
 \*-----------------------------------*/
 
 
@@ -334,7 +334,7 @@ main {
   
 }
 
-.sidebar.active { max-height: 405px; }
+.sidebar.active { max-height: 520px; } /* or 520px */
 
 .sidebar-info {
   position: relative;
@@ -425,7 +425,7 @@ main {
 
 .contact-info {
   max-width: calc(100% - 46px);
-  width: calc(100% - 406px);
+  width: calc(100% - 46px);
 }
 
 .contact-title {
@@ -454,177 +454,240 @@ main {
 .social-item .social-link {
   color: var(--light-gray-70);
   font-size: 18px;
+  margin-top: 30px;
 }
 
 
 .social-item .social-link:hover { color: var(--light-gray); }
 
 
+/* ===================================== */
+/* CHAT UI – RESPONSIVE GLASS-MORPHISM */
+/* ===================================== */
 
-
-/*-------------------------*\
-#aibot
-\*-------------------------*/
-
-/* AI Chat Bot Styles */
-
-
-
+/* -------------------------------------------------
+   1. ROOT CONTAINER – 100 % of the parent width
+   ------------------------------------------------- */
 .ai-content {
-  background-color: #1a1a1a; /* dark background */
-  color: #f0f0f0; /* light text */
-  padding: 15px;
-  border-radius: 10px;
-  font-family: Arial, sans-serif;
+  padding: 0;
+  width: 100%;               /* take full width of the page */
+  max-width: none;           /* remove the old 560px limit */
+  margin: 0 auto;
 }
 
-.ai-content p {
-  margin-bottom: 10px;
-  color: #f0f0f0;
-}
-
-.chat-container {
+/* -------------------------------------------------
+   2. CHAT WRAPPER – flexible width & height
+   ------------------------------------------------- */
+.chat-wrapper {
+  background: rgba(20,20,20,0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-5);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+
+  /* Height: 80vh on large screens, 70vh on mobile */
+  height: 80vh;
+  max-height: 80vh;
+  width: 100%;               /* full width */
 }
 
-.chat-messages {
-  border: 1px solid #555;
-  background-color: #121212; /* darker chat background */
-  padding: 10px;
-  height: 400px;
-  overflow-y: auto;
-  border-radius: 5px;
-  color: #f0f0f0;
-  font-size: 14px;
-  white-space: pre-wrap;
-  font-family: monospace;
-}
-
-.chat-messages div {
-  margin-bottom: 5px;
-}
-
-.chat-input {
+/* -------------------------------------------------
+   3. HEADER
+   ------------------------------------------------- */
+.chat-header {
   display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: rgba(0,0,0,0.3);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.bot-avatar {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: var(--orange-yellow-crayola);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #111;
+  font-size: 16px;
+}
+.bot-name   { font-weight: var(--fw-600); color: var(--orange-yellow-crayola); font-size: var(--fs-4); }
+.bot-subtitle { font-size: var(--fs-7); color: var(--light-gray-70); }
+
+/* -------------------------------------------------
+   4. MESSAGES AREA
+   ------------------------------------------------- */
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Message bubbles – responsive max-width */
+.message {
+  max-width: 78%;            /* default for large screens */
+  display: flex;
+  gap: 8px;
+  animation: fadeIn 0.3s ease-out;
+}
+.message.user { align-self: flex-end; flex-direction: row-reverse; }
+.message.ai   { align-self: flex-start; }
+
+.message-avatar {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--orange-yellow-crayola);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #111;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+.message.user .message-avatar { display: none; }
+
+.message-bubble {
+  padding: 10px 14px;
+  border-radius: 18px;
+  line-height: 1.45;
+  word-wrap: break-word;
+}
+.message.user .message-bubble {
+  background: var(--orange-yellow-crayola);
+  color: var(--smoky-black);
+  border-bottom-right-radius: 4px;
+}
+.message.ai .message-bubble {
+  background: var(--eerie-black-1);
+  color: var(--white-2);
+  border: 1px solid var(--jet);
+  border-bottom-left-radius: 4px;
+}
+
+/* -------------------------------------------------
+   5. TYPING INDICATOR
+   ------------------------------------------------- */
+.typing-indicator {
+  display: flex;
+  gap: 6px;
+  padding: 8px 18px;
+  align-items: center;
+}
+.typing-indicator span {
+  width: 8px; height: 8px;
+  background: var(--orange-yellow-crayola);
+  border-radius: 50%;
+  animation: typingDot 1.4s infinite both;
+}
+.typing-indicator span:nth-child(2) { animation-delay: .2s; }
+.typing-indicator span:nth-child(3) { animation-delay: .4s; }
+@keyframes typingDot {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-8px); }
+}
+
+/* -------------------------------------------------
+   6. INPUT BAR
+   ------------------------------------------------- */
+.chat-input-wrapper {
+  display: flex;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  background: rgba(0,0,0,0.2);
+  padding: 12px;
   gap: 10px;
 }
-
-.chat-input input {
+#user-message {
   flex: 1;
-  padding: 8px;
-  border-radius: 5px;
-  border: 1px solid #555;
-  background-color: #1a1a1a;
-  color: #f0f0f0;
-  font-size: 14px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  padding: 10px 14px;
+  color: var(--white-2);
+  font-size: var(--fs-6);
 }
+#user-message::placeholder { color: var(--light-gray-70); }
+#user-message:focus { outline: none; border-color: var(--orange-yellow-crayola); }
 
-.chat-input input::placeholder {
-  color: #aaa;
-}
-
-.chat-input button {
-  padding: 8px 12px;
+#send-btn {
+  width: 44px; height: 44px;
+  background: var(--orange-yellow-crayola);
+  color: var(--smoky-black);
   border: none;
-  border-radius: 5px;
-  background-color: #e63946; /* website accent color */
-  color: #fff;
-  font-weight: bold;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: transform .2s, background .2s;
 }
+#send-btn:hover { background: hsl(45,100%,78%); transform: scale(1.08); }
+#send-btn ion-icon { font-size: 20px; }
 
-.chat-input button:hover {
-  background-color: #d62828; /* darker red on hover */
-}
-
-/* AI message specific color */
-.chat-messages .ai-message {
-  color: #a8dadc; /* soft cyan for AI replies */
-}
-
-/* Scrollbar styling for chat messages */
-.chat-messages::-webkit-scrollbar {
-  width: 6px;
-}
-
+/* -------------------------------------------------
+   7. SCROLLBAR
+   ------------------------------------------------- */
+.chat-messages::-webkit-scrollbar { width: 6px; }
 .chat-messages::-webkit-scrollbar-thumb {
-  background-color: #555;
+  background: rgba(255,255,255,0.2);
   border-radius: 3px;
 }
 
-.chat-messages::-webkit-scrollbar-track {
-  background-color: #1a1a1a;
-}
-
-/** message container **/
-
-/* Message Bubbles for Chat */
-.message-container {
-  display: flex;
-  margin-bottom: 12px;
-  gap: 8px;
-  animation: fadeIn 0.3s ease;  /* Smooth entry */
-}
-
+/* -------------------------------------------------
+   8. ANIMATIONS
+   ------------------------------------------------- */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity:0; transform:translateY(6px); }
+  to   { opacity:1; transform:none; }
 }
 
-.user-message {
-  justify-content: flex-end;  /* Right-align user */
-}
-
-.ai-message {
-  justify-content: flex-start;  /* Left-align bot */
-}
-
-.message-text {
-  max-width: 80%;  /* Prevent overflow */
-  padding: 10px 14px;
-  border-radius: 18px;  /* Rounded bubbles */
-  font-size: 14px;
-  line-height: 1.4;
-  white-space: pre-wrap;  /* Preserve line breaks from bot */
-  word-wrap: break-word;
-}
-
-.user-message .message-text {
-  background: var(--orange-yellow-crayola); /* Subtle yellow from your theme */
-  color: var(--smoky-black);  /* Dark text for contrast */
-  border-bottom-right-radius: 4px;  /* Tail effect */
-}
-
-.ai-message .message-text {
-  background: var(--eerie-black-1);  /* Dark bg matching site */
-  color: var(--white-2);  /* Light text */
-  border: 1px solid var(--jet);  /* Subtle border */
-  border-bottom-left-radius: 4px;  /* Tail effect */
-}
-
-/* Responsive: Smaller bubbles on mobile */
-@media (max-width: 580px) {
-  .message-text {
-    max-width: 90%;
-    padding: 8px 12px;
-    font-size: 13px;
+/* -------------------------------------------------
+   9. RESPONSIVE BREAKPOINTS
+   ------------------------------------------------- */
+@media (max-width: 680px) {
+  .chat-wrapper {
+    height: 70vh;               /* a bit shorter on phones */
+    max-height: 70vh;
+    border-radius: 16px;        /* slightly smaller corners */
   }
+
+  .message { max-width: 88%; }   /* bubbles almost fill the width */
+  .chat-messages { padding: 10px 14px; }
+  .chat-header   { padding: 12px 14px; }
+  .chat-input-wrapper { padding: 10px; }
 }
 
-
+/* Optional: even tighter on very small screens */
+@media (max-width: 360px) {
+  .bot-avatar, .message-avatar { width: 36px; height: 36px; }
+  .message { max-width: 92%; }
+}
 /*-----------------------------------*\
   #NAVBAR
 \*-----------------------------------*/
+.ai-logo {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle; /* better alignment than right */
+  margin-left: -30px; /* default for large screens */
+}
 
- .ai-logo {
-      width: 25px;
-      height: 25px;
-      margin-left: -30px;
-      vertical-align: right;
-    }
+/* For mobile screens (up to 768px width) */
+@media (max-width: 768px) {
+  .ai-logo {
+    margin-left: -5px; /* adjust for small screens */
+  }
+}
+
 
 .navbar {
   position: fixed;
@@ -2586,6 +2649,26 @@ textarea.form-input::-webkit-resizer { display: none; }
   }
 
   .social-list { justify-content: center; }
+
+
+  /*-----------------------------------*\
+  #SIDEBAR (Copyright)
+\*-----------------------------------*/
+
+.sidebar-info_more .copyright {
+  padding: 1.5rem 0;
+  text-align: center;
+  color: var(--light-gray-70);
+  font-size: var(--fs-8);
+  line-height: 1.4;
+  letter-spacing: -0.024em;
+  opacity: 0.8;
+}
+
+.sidebar-info_more .copyright p {
+  margin: 0;
+}
+
 
 
 
