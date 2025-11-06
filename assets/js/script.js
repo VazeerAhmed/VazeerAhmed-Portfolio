@@ -173,55 +173,72 @@ form.addEventListener("submit", (e) => {
   }
 });
 
-// Chatbot functionality
-const chatMessages = document.getElementById("chat-messages");
-const userInput = document.getElementById("user-message");
-const sendBtn = document.getElementById("send-btn");
+// Append message (no timestamp)
+  function appendMessage(text, isUser = false) {
+    const messagesDiv = document.getElementById('chat-messages');
+    const msgDiv = document.createElement('div');
+    msgDiv.className = `message ${isUser ? 'user' : 'ai'}`;
 
-async function sendMessage() {
-  const message = userInput.value.trim();
-  if (!message) return;
+    if (!isUser) {
+      const avatar = document.createElement('div');
+      avatar.className = 'message-avatar';
+      avatar.textContent = 'A';
+      msgDiv.appendChild(avatar);
+    }
 
-  // Show user message (right-aligned bubble)
-  const userDiv = document.createElement("div");
-  userDiv.classList.add("message-container", "user-message");  // Add classes for styling
-  userDiv.innerHTML = `<span class="message-text"> ${message}</span>`;
-  chatMessages.appendChild(userDiv);
-  chatMessages.scrollTop = chatMessages.scrollHeight;  // Auto-scroll
+    const bubble = document.createElement('div');
+    bubble.className = 'message-bubble';
+    bubble.innerHTML = text.replace(/\n/g, '<br>');
 
-  userInput.value = "";
-
-  // Send to Flask backend
-  try {
-    const res = await fetch("/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message })
-    });
-
-    const data = await res.json();
-    // Show bot message (left-aligned bubble)
-    const botDiv = document.createElement("div");
-    botDiv.classList.add("message-container", "ai-message");  // Add classes for styling
-    botDiv.innerHTML = `<span class="message-text"> ${data.response}</span>`;
-    chatMessages.appendChild(botDiv);
-    chatMessages.scrollTop = chatMessages.scrollHeight;  // Auto-scroll
-  } catch (error) {
-    console.error("Error:", error);
-    // Optional: Show error bubble
-    const errorDiv = document.createElement("div");
-    errorDiv.classList.add("message-container", "ai-message");
-    errorDiv.innerHTML = `<span class="message-text"> Sorry, something went wrong. Try again!</span>`;
-    chatMessages.appendChild(errorDiv);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
+    msgDiv.appendChild(bubble);
+    messagesDiv.appendChild(msgDiv);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
   }
-}
 
-sendBtn.addEventListener("click", sendMessage);
-userInput.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") sendMessage();
-});
+  function showTyping() {
+    document.getElementById('typing-indicator').style.display = 'flex';
+  }
+  function hideTyping() {
+    document.getElementById('typing-indicator').style.display = 'none';
+  }
 
+  // Send message
+  async function sendMessage() {
+    const input = document.getElementById('user-message');
+    const msg = input.value.trim();
+    if (!msg) return;
+
+    appendMessage(msg, true);
+    input.value = '';
+    showTyping();
+
+    try {
+      const res = await fetch('/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: msg })
+      });
+      const data = await res.json();
+      hideTyping();
+      appendMessage(data.response, false);
+    } catch (err) {
+      hideTyping();
+      appendMessage('Connection error. Please try again.', false);
+    }
+  }
+
+  // Event Listeners
+  document.getElementById('send-btn').addEventListener('click', sendMessage);
+  document.getElementById('user-message').addEventListener('keydown', e => {
+    if (e.key === 'Enter') sendMessage();
+  });
+
+  // Optional: Welcome message on load
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      appendMessage("Hello! I'm <strong>A.R.I.S.E</strong> — your guide to Vazeer’s tech world.", false);
+    }, 500);
+  });
 // page navigation variables
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
