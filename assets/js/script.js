@@ -372,3 +372,33 @@ const carousel = document.getElementById('skillsCarousel');
     carousel.addEventListener('touchstart', startDragging);
     carousel.addEventListener('touchend', stopDragging);
     carousel.addEventListener('touchmove', dragging);
+
+  //// ───────── Terms & Privacy Modal ─────────
+// ───────── Sidebar Page Switcher ─────────
+
+// Function to switch pages from Sidebar (Terms/Privacy)
+function switchToPage(pageId) {
+  // 1. Get all articles (pages) and navigation links
+  const pages = document.querySelectorAll("[data-page]");
+  const navLinks = document.querySelectorAll("[data-nav-link]");
+
+  // 2. Deactivate all pages
+  for (let i = 0; i < pages.length; i++) {
+    pages[i].classList.remove("active");
+  }
+
+  // 3. Deactivate all navbar links (since Terms/Privacy aren't in the top navbar)
+  for (let i = 0; i < navLinks.length; i++) {
+    navLinks[i].classList.remove("active");
+  }
+
+  // 4. Activate the specific target page
+  const targetPage = document.querySelector(`[data-page="${pageId}"]`);
+  if (targetPage) {
+    targetPage.classList.add("active");
+    window.scrollTo(0, 0); // Scroll to top
+  }
+}
+
+
+
