@@ -196,7 +196,14 @@ form.addEventListener("submit", (e) => {
   }
 
   function showTyping() {
-    document.getElementById('typing-indicator').style.display = 'flex';
+    const indicator = document.getElementById('typing-indicator');
+    const messagesDiv = document.getElementById('chat-messages');
+    
+    // Move the indicator to the very end of the list so it appears below the latest message
+    messagesDiv.appendChild(indicator);
+    
+    indicator.style.display = 'flex';
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
   }
   function hideTyping() {
     document.getElementById('typing-indicator').style.display = 'none';
