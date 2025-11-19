@@ -1731,13 +1731,35 @@
   </header>
 
   <section class="ai-content">
-<p>Meet A.R.I.S.E, an AI where Advanced Reasoning and Intelligent Support Engine powers advanced query answering with a dynamic feel.</p>
-    <div class="chat-container">
-      <div id="chat-messages" class="chat-messages"></div>
-      <div class="chat-input">
-        <input type="text" id="user-message" placeholder="Type your message...">
-        <button id="send-btn">Send</button>
+    <p style="margin-bottom: 15px; color: var(--light-gray);">
+      Meet A.R.I.S.E, an AI where Advanced Reasoning and Intelligent Support Engine powers advanced query answering with a dynamic feel.
+    </p>
+    
+    <div class="chat-wrapper">
+      
+      <div class="chat-header">
+        <div class="bot-avatar">A</div>
+        <div>
+          <div class="bot-name">A.R.I.S.E</div>
+          <div class="bot-subtitle">Online</div>
+        </div>
       </div>
+
+      <div id="chat-messages" class="chat-messages">
+        <div id="typing-indicator" class="typing-indicator" style="display: none;">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div class="chat-input-wrapper">
+        <input type="text" id="user-message" placeholder="Type your message...">
+        <button id="send-btn">
+          <ion-icon name="paper-plane"></ion-icon>
+        </button>
+      </div>
+
     </div>
   </section>
 </article>
