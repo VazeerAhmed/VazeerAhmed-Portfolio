@@ -373,6 +373,8 @@ const carousel = document.getElementById('skillsCarousel');
     carousel.addEventListener('touchend', stopDragging);
     carousel.addEventListener('touchmove', dragging);
 
+    
+
   //// ───────── Terms & Privacy Modal ─────────
 // ───────── Sidebar Page Switcher ─────────
 
